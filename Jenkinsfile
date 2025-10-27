@@ -13,7 +13,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 retry(3) {
-                    sh 'sudo ./deploy.sh'
+                    sh './deploy.sh'
                 }
             }
         }
