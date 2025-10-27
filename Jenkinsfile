@@ -6,6 +6,10 @@ pipeline {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
     }
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: '选择分支')
+        choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: '部署环境')
+    }
     stages {
         stage('Build') {
             steps {
