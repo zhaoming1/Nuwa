@@ -22,12 +22,13 @@ pipeline {
             }
         }
         stage('Test') {
+            agent any
             when {
                 expression {params.ENV == "dev"}
             }
             steps {
                 sh 'node --version'
-                dir('/tmp') {
+                dir('/opt') {
                     sh 'ls -lah'
                 }
             }
