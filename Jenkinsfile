@@ -1,7 +1,4 @@
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
     environment {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
@@ -22,12 +19,21 @@ pipeline {
             }
         }
         stage('Test') {
-            agent any
+            agent {
+                docker { image 'node:7-alpine' }
+            }
             when {
-                expression {params.ENV == "dev"}
+                expression {params.ENV == "dev" || params.ENV == "prod"}
             }
             steps {
                 sh 'node --version'
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {params.ENV == "prod"}
+            }
+            steps {
                 dir('/opt') {
                     sh 'ls -lah'
                 }
