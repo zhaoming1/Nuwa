@@ -35,6 +35,14 @@ pipeline {
                 expression {params.ENV == "prod"}
             }
             steps {
+                sh 'sh deploy.sh'
+            }
+        }
+        stage('Check') {
+            when {
+                expression {params.ENV == "prod"}
+            }
+            steps {
                 dir('/opt') {
                     sh 'ls -lah'
                 }
