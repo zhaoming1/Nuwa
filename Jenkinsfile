@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 sh 'node --version'
-                dir('/opt/'){
+                dir('/tmp') {
                     sh 'ls -lah'
                 }
             }
