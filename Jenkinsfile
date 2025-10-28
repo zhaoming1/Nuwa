@@ -22,8 +22,14 @@ pipeline {
             }
         }
         stage('Test') {
+            when {
+                expression {params.ENV == "dev"}
+            }
             steps {
                 sh 'node --version'
+                dir('/opt/'){
+                    sh 'ls -lah'
+                }
             }
         }
     }
